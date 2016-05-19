@@ -1,35 +1,13 @@
 body {
-  text-align: center;
-  font-family: 'Chelsea Market', cursive;
-  background-color: #543075;
-  margin: 0;
+    text-align: center;
+    font-family: 'Roboto', sans-serif !important;
+    background-color: #543075;
+}
+nav {
+    color: white;
+    font-weight: 900;
 }
 
-header {
-  padding: 10px;
-  background-color: #8560A8;
-  color: lightgrey;
-}
-
-#viewerList {
-  margin: 30px 180px 0 180px;
-  padding: 40px;
-  background-color: #A782CA;
-  list-style: none;
-}
-
-li {
-  background-color: #C9A4EC;
-  margin: 10px 0;
-}
-
-.userList {
-  text-align: left;
-  width: auto;
-  font-weight: bold;
-}
-
-.twitchList {
-  width: auto;
-  font-weight: normal;
+h3 {
+  font-weight: bold !important;
 }
