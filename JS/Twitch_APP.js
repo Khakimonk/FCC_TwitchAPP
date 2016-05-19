@@ -1,11 +1,11 @@
-var twitchUser = ["freecodecamp", "storbeck", "terakilobyte", "habathcx","RobotCaleb","thomasballinger","noobs2ninjas","beohoff"];
-$(document).ready(function() {
-  for(var i = 0; i < twitchUser.length; i++) {
-    $('#viewerList').append('<li>' + twitchUser[i] + '</li>');
-  }
-});
+var twitchUser = ["freecodecamp", "storbeck", "terakilobyte", "habathcx", "RobotCaleb", "thomasballinger", "noobs2ninjas", "beohoff"];
+/*$(document).ready(function() {
+    for (var i = 0; i < twitchUser.length; i++) {
+        $('#viewerList').append('<li>' + twitchUser[i] + '</li>');
+    }
+});*/
 
-var twitchURL = "https://api.twitch.tv/kraken/streams/gpl";
+var twitchURL = "https://api.twitch.tv/kraken/streams/";
 var stream;
 
 /*$.getJSON(twitchURL, function(data) {
@@ -13,17 +13,27 @@ var stream;
     console.log(stream);
   });*/
 
-  function findStreamer() {
-        $.getJSON(twitchURL, function(data, callback) {
-          stream = data.stream;
-          if(stream == !null){
-            isLive(data.stream);
-          }
-        });
+function checkOnline() {
+  for(var i = 0; i < twitchUser.length; i++) {
+    findStreamer(twitchUser[i]);
   }
-
-function isLive(data) {
-  console.log(data);
 }
 
-console.log(findStreamer(isLive()));
+function findStreamer(twitchUser) {
+    twitchURL += twitchUser;
+    console.log(twitchURL);
+    $.getJSON(twitchURL, function(data) {
+        showData(data);
+        //console.log(stream);
+    });
+    twitchURL = "https://api.twitch.tv/kraken/streams/";
+}
+
+function showData(data) {
+    var showUser = [];
+    stream = data;
+    showUser.push(stream);
+    console.log(showUser);
+}
+
+checkOnline();
