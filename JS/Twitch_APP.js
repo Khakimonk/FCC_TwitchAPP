@@ -44,15 +44,73 @@ function useData(data, twitchUser) {
 }
 
 function showResult(twitchUser) {
-    if(twitchUser.status == "offline" && $viewerContainer.attr("class") == "jumbotron all" || $viewerContainer.attr("class") == "jumbotron offline") {
-      $list.append('<div class="panel panel-primary"><div class="panel-heading" id="viewerList"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.status + '</div></div>');
-    }
-    else if (twitchUser.status == "online" && $viewerContainer.attr("class") == "jumbotron all" || $viewerContainer.attr("class") == "jumbotron online") {
-      $list.append('<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.status + '</div></div>');
-    }
-    else if (twitchUser.status == "online" && $viewerContainer.attr("class") == "jumbotron all" || $viewerContainer.attr("class") == "jumbotron online") {
-      $list.append('<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.game + '</div></div>');
+    if ($viewerContainer.attr("class") === "jumbotron all") {
+        showAll(twitchUser);
+    } else if ($viewerContainer.attr("class") === "jumbotron offline") {
+        showOffline(twitchUser);
+    } else if ($viewerContainer.attr("class") === "jumbotron online") {
+        showOnline(twitchUser);
     }
 }
 
-checkOnline();
+function showAll(twitchUser) {
+    if (twitchUser.status === "offline") {
+        $list.append('<div class="panel panel-primary"><div class="panel-heading" id="viewerList"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.status + '</div></div>');
+    } else if (twitchUser.game != null) {
+        $list.append('<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.game + '</div></div>');
+    } else if (twitchUser.status == "online") {
+        $list.append('<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.status + '</div></div>');
+    }
+}
+
+function showOffline(twitchUser) {
+  if (twitchUser.status === "offline") {
+      $list.append('<div class="panel panel-primary"><div class="panel-heading" id="viewerList"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.status + '</div></div>');
+  }
+}
+
+function showOnline(twitchUser) {
+  if (twitchUser.game != null) {
+      $list.append('<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.game + '</div></div>');
+  } else if (twitchUser.status == "online") {
+      $list.append('<div class="panel panel-primary"><div class="panel-heading"><h3 class="panel-title">' + twitchUser.twitchID + '</h3></div><div class="panel-body">' + twitchUser.status + '</div></div>');
+  }
+
+}
+
+$(document).ready(function() {
+      checkOnline();
+      $('#all').click(function() {
+            if($viewerContainer.attr("class") === "jumbotron offline") {
+              $viewerContainer.removeClass("jumbotron offline").addClass("jumbotron all");
+            }
+            else if($viewerContainer.attr("class") === "jumbotron online") {
+              $viewerContainer.removeClass("jumbotron online").addClass("jumbotron all");
+            }
+            console.log($viewerContainer.attr("class"));
+            $list.empty();
+            checkOnline();
+      });
+      $('#offline').click(function() {
+            if($viewerContainer.attr("class") === "jumbotron all") {
+              $viewerContainer.removeClass("jumbotron all").addClass("jumbotron offline");
+            }
+            else if($viewerContainer.attr("class") === "jumbotron online") {
+              $viewerContainer.removeClass("jumbotron online").addClass("jumbotron offline");
+            }
+            console.log($viewerContainer.attr("class"));
+            $list.empty();
+            checkOnline();
+      });
+      $('#online').click(function() {
+            if($viewerContainer.attr("class") === "jumbotron offline") {
+              $viewerContainer.removeClass("jumbotron offline").addClass("jumbotron online");
+            }
+            else if($viewerContainer.attr("class") === "jumbotron all") {
+              $viewerContainer.removeClass("jumbotron all").addClass("jumbotron online");
+            }
+            console.log($viewerContainer.attr("class"));
+            $list.empty();
+            checkOnline();
+      });
+   });
