@@ -22,3 +22,14 @@ li {
   background-color: #C9A4EC;
   margin: 10px 0;
 }
+
+.userList {
+  text-align: left;
+  width: auto;
+  font-weight: bold;
+}
+
+.twitchList {
+  width: auto;
+  font-weight: normal;
+}
