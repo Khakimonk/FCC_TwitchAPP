@@ -11,3 +11,11 @@ nav {
 h3 {
   font-weight: bold !important;
 }
+a:link {
+  text-decoration: none;
+  color: white;
+}
+a:link:active, a:link:hover {
+  text-decoration: none;
+  color: darkblue;
+}
